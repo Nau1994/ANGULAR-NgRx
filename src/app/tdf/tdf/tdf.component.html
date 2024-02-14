@@ -1,0 +1,66 @@
+<div class="container container-fluid border border-light my-1">
+    <div class="row">
+        <div class="col-md-8 mx-auto my-auto align-center">
+            <form #userform="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group" #userdata="ngModelGroup" ngModelGroup="userdata">
+                    <div class="form-group row">
+                        <label for="username">User Name</label>
+                        <div class="col-sm-1-12">
+                            <input #username="ngModel" type="text" class="form-control" name="username" id="username" ngModel placeholder="" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email">Email</label>
+                        <div class="col-sm-1-12">
+                            <input #email="ngModel" type="text" class="form-control" name="email" id="email" ngModel placeholder="" required email>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="gender">Gender</label>
+                    <div class="col-sm-1-12">
+                        <select #gender="ngModel" type="text" class="form-control form-select" name="gender" id="gender" ngModel  required>
+                        <option value="Male" >Male</option>
+                        <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-1-12 mt-2 ">
+                        <button type="submit" class="btn btn-outline-primary" [disabled]="!userform.valid||!userform.dirty">Submit</button>
+                        <button class="btn btn-outline-warning float-end" [disabled]="!userform.dirty" (click)="reset()">Reset</button>
+                    </div>
+                </div>
+            </form>
+            <div *ngIf="users.length">
+                <h3>User Data</h3>
+                <table class="table table-striped table-inverse table-responsive table-hover">
+                    <thead style="color:gray;">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (user of users; track $index) {
+                            <tr>
+                                <td>{{user.id}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.gender}}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            
+                <div class="form-group row">
+                    <div class="col-sm-1-12 mt-2 ">
+                        <button class="btn btn-outline-danger float-end" (click)="clear()">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

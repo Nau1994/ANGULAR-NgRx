@@ -1,0 +1,26 @@
+<!-- <custome-alert-modal-component></custome-alert-modal-component> -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto my-auto align-center">
+            <div class="account-wall">
+                <form #loginForm="ngForm" class="form-signin">
+                    <input type="text" class="form-control" placeholder="Email" name="email" ngModel required autofocus>
+                    <input type="password" class="form-control" placeholder="Password" name="password" ngModel required>
+                    
+                    <button class="btn btn-lg btn-primary btn-block" (click)="onSignUp()" [disabled]="!loginForm.valid">
+                        Sign up
+                    </button>
+
+                    <button *ngIf="!loggedIn" class="btn btn-lg btn-primary btn-block float-end" (click)="onLogin()" [disabled]="!loginForm.valid">
+                        Sign in
+                    </button>
+
+                    <button *ngIf="loggedIn" class="btn btn-lg btn-danger btn-block float-end" (click)="onLogOut()">
+                        Log out
+                    </button>
+                </form>
+            </div>
+            <!-- <a class="text-center new-account">Sign up </a> -->
+        </div>
+    </div>
+</div>

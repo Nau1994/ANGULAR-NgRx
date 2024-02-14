@@ -1,0 +1,38 @@
+<div class="container border border-light my-1">
+    <div class="row">
+        <div class="col-md-8 mx-auto my-auto align-center">
+            @if (feed) {
+                <form #feedForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="card my-1" >
+                    <div class="card-body">
+                        <!-- @if(!editMode){ -->
+                            <h5 class="card-title" [hidden]="editMode">{{feed.title}}</h5>
+                            <p class="card-text" [hidden]="editMode">{{feed.post}}.</p>
+                            <button type="submit" class="btn btn-danger float-end mx-1 my-1" (click)="onDelete()" [hidden]="editMode">Delete</button>
+                        <!-- } -->
+                        <!-- @else { -->
+                            <input name="title" class="form-control" ngModel required [hidden]="!editMode"/>
+                            <textarea name="post" class="form-control" ngModel required [hidden]="!editMode"></textarea>
+                            <button  class="btn btn-primary float-end mx-1 my-1" (click)="onClose()" [hidden]="!editMode">Cancel</button>
+                        <!-- } -->
+                        <button  class="btn btn-warning float-end my-1" (click)="onEdit(feedForm)" [disabled]="editMode && !feedForm.valid" >{{editMode?"Update":"Edit"}}</button>
+                    </div>
+                  </div>
+                </form>
+            }
+            @else {
+                <form #postForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="card my-2" >
+                        <div class="card-body">
+                            <h5 class="card-title" for="title">Title</h5>
+                            <input type="text" id="title" class="form-control" name="title" ngModel required/>
+                            <p class="card-text" for="post" >Post</p>
+                            <textarea type="text" id="post" class="form-control" name="post" ngModel required></textarea>
+                            <button  class="btn btn-primary float-end my-1" (click)="onFeedAdd(postForm)" [disabled]="!postForm.valid">Post</button>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>

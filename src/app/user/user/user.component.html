@@ -1,0 +1,33 @@
+<app-load-spinner *ngIf="isLoading"></app-load-spinner>
+<div class="container-fluid border border-light my-1">
+    <div class="row">
+    <table class="table table-bordered table-hover">
+        <tbody >
+            <tr>
+                <th>Name</th><td>{{user.name}}</td>
+            </tr>
+            <tr>
+                <th>User Name</th><td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <th>Email</th><td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <th>Phone</th><td>{{user.phone}}</td>
+            </tr>
+            <tr>
+                <th>Web Site</th><td>{{user.website}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="nav nav-tabs nav-stacked">
+        <li class="nav-item">
+            <a  class="nav-link " [routerLink]='["address"]' routerLinkActive="active" [state]="user.address">Address</a>
+        </li>
+        <li class="nav-item">
+            <a  class="nav-link" [routerLink]='["company"]' routerLinkActive="active" [state]="user.company">Company</a>
+        </li>
+    </ul>
+    <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="container container-fluid border border-light my-1">
+    <div class="row">
+        <div class="col-md-8 mx-auto my-auto align-center">
+            <div class="container">
+                <form [formGroup]="userForm">
+                    <div formGroupName="userdata">
+                        <div class="form-group row my-1">
+                            <label class="col-sm-2" for="username">User Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" formControlName="username">
+                            </div>
+                        </div>
+                        <div class="form-group row my-1">
+                            <label class="col-sm-2" for="email">Email</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="email" formControlName="email">
+                            </div>
+                        </div>
+                    </div>
+                    <span class="help-text" *ngIf="userForm.get('userdata.email')?.touched && userForm.get('userdata.email')?.errors?.IsRestricted">Email is Invalid!</span>
+                    
+                    <div class="form-group row my-1">
+                        <label class="col-sm-2" for="gender">Gender</label>
+                        <div class="col-sm-10">
+                            <select type="text" class="form-control form-select" id="gender" formControlName="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                <div class="form-group row my-1">
+                    <label  class="form-label col-sm-2 col-form-label">Hobbies</label>
+                    <div class="col-sm-6">
+                        <!-- <input type="text" class="form-control" #hobby /> -->
+                        <input type="text" class="form-control" #hobby id="hobby" formControlName="hobby" />
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-outline-warning float-end"  (click)="onAddHobby(hobby.value);hobby.value=''">Add Hobby</button>
+                    </div>
+                    
+                </div>
+                <span class="help-text" 
+                *ngIf="userForm.get('hobby')?.touched && userForm.get('hobby')?.errors?.isAlreadyAdded">Hobby already added!</span>
+                
+                <div formArrayName="hobbies">
+                    <div class="col-md-8">
+                    <div class="container col-sm-6 mx-auto my-auto align-center">
+                    <div class="row">
+                        @for (hobby of hobbies; track $index) {
+                            
+                            <input type="text" class="form-control mx-1" [id]='$index' [formControlName]="$index"/> 
+                            <!-- <ngb-alert class="show" (closed)="onRemoveHobby($index)">{{hobby.value}}</ngb-alert> -->
+                        
+                        }
+                        
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                    
+                <div class="form-group row">
+                    <div class="col-sm-1-12 mt-2 ">
+                        <button type="submit" class="btn btn-outline-primary" (click)="onAdd()" [disabled]="userForm.invalid">Add</button>
+                        <button class="btn btn-outline-warning float-end" >Reset</button>
+                    </div>
+                </div>
+
+                <div class="col-sm-1-12" *ngIf="submitted==true">
+                    <h3>User Data</h3>
+                    <table class="table table-striped table-inverse table-responsive">
+                        <thead style="color:gray;">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                                <th>Hobbies</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (user of users; track $index) {
+                                <tr>
+                                    <td>{{user.id}}</td>
+                                    <td>{{user.name}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.gender}}</td>
+                                    <td>{{user.hobbies}}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                <div class="form-group row my-1">
+                    <div >
+                      <button type="submit" class="btn btn-primary float-end" [disabled]="!users.length">Save</button>
+                    </div>
+                </div>
+                </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
